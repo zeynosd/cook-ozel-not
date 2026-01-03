@@ -1,191 +1,184 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Sana Özel <3</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Sana Özel <3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #fff0f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-    }
-    .container {
-      background: white;
-      padding: 24px;
-      border-radius: 20px;
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
 
-    h1 {
-      color: #e75480;
-    }
-
-    input {
-      padding: 10px;
-      width: 80%;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      margin-top: 10px;
-      font-size: 16px;
-      text-align: center;
-    }
-
-    button {
-      margin-top: 12px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      background: #e75480;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #d64570;
-    }
-
-    /* 🔒 Not gizliyken */
-    .hidden-note {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 2s ease, transform 2s ease;
-      margin-top: 24px;
-    }
-
-    /* ✨ Şifre doğruysa */
-    .hidden-note.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* 💗 Kalp animasyonu */
-    .heart {
-      font-size: 28px;
-      animation: pulse 1.5s infinite;
-      display: inline-block;
-      margin: 16px 0;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-      100% { transform: scale(1); }
-    }
-
-    img {
-      max-width: 100%;
-      border-radius: 16px;
-      margin-bottom: 20px;
-    }
-    .hearts {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff0f5;
   overflow: hidden;
-  z-index: 0;
+  font-family: 'Dancing Script', cursive;
 }
 
-.hearts span {
+/* PEMBE DUMAN */
+.smoke {
   position: absolute;
-  bottom: -20px;
-  font-size: 20px;
-  animation: floatUp 8s linear infinite;
-  opacity: 0.6;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,182,193,0.35), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(255,192,203,0.35), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(255,160,180,0.35), transparent 50%);
+  animation: smokeMove 18s infinite alternate ease-in-out;
 }
 
-.hearts span:nth-child(1) { left: 10%; animation-delay: 0s; }
-.hearts span:nth-child(2) { left: 30%; animation-delay: 2s; }
-.hearts span:nth-child(3) { left: 50%; animation-delay: 4s; }
-.hearts span:nth-child(4) { left: 70%; animation-delay: 1s; }
-.hearts span:nth-child(5) { left: 90%; animation-delay: 3s; }
-
-@keyframes floatUp {
-  0% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  20% { opacity: 0.6; }
-  100% {
-    transform: translateY(-110vh);
-    opacity: 0;
-  }
+@keyframes smokeMove {
+  from { transform: translate(-5%, -5%); }
+  to { transform: translate(5%, 5%); }
 }
 
-/* container kalplerin üstünde olsun */
-.container {
+/* ŞİFRE EKRANI */
+#lock {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  background: #ffe6ee;
+  padding: 30px;
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
 }
-  </style>
+
+input {
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #c94a7c;
+  color: white;
+  font-size: 1em;
+}
+
+/* NOT */
+#note {
+  display: none;
+  position: relative;
+  z-index: 2;
+  background: #ffe6ee;
+  padding: 30px;
+  border-radius: 22px;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  opacity: 0;
+  animation: fadeOpen 2s forwards;
+}
+
+@keyframes fadeOpen {
+  to { opacity: 1; }
+}
+
+h1 {
+  text-align: center;
+  color: #c94a7c;
+  font-size: 2.2em;
+}
+
+p {
+  font-size: 1.35em;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+/* TYPEWRITER */
+.typewriter span {
+  border-right: 2px solid #c94a7c;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+.photo {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.photo img {
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+</style>
 </head>
-<div class="hearts">
-  <span>💗</span>
-  <span>💞</span>
-  <span>💕</span>
-  <span>💖</span>
-  <span>🩷</span>
-</div>
+
 <body>
-  <div class="container">
-    <h1>🔐</h1>
-    <p>Bulmacayı çöz şifreyi bul 😙</p>
 
-    <input type="text" id="passwordInput" placeholder="gg.aa.yyyy">
-    <br>
-    <button onclick="checkPassword()">Aç</button>
+<div class="smoke"></div>
 
-    <!-- 💌 GİZLİ NOT -->
-    <div id="secretNote" class="hidden-note">
+<div id="lock">
+  <h2>Bir soru var 💌</h2>
+  <p>Tanıştığımız günün tarihi?</p>
+  <input type="text" id="password" placeholder="GG.AA.YYYY">
+  <br>
+  <button onclick="check()">Aç</button>
+</div>
 
-      <!-- 🖼️ RESİM (istersen sil) -->
-      <!-- <img src="biz.webp" alt="biz"> -->
+<div id="note">
+  <h1>Sevgilim,</h1>
 
-      <div class="heart">❤️</div>
+  <p class="typewriter" data-text="Bu satırları okurken belki gülümsüyorsundur. Bu notu yazarken aklımda tek bir şey vardı: sen."></p>
 
-      <p><strong>Sevgilim Deniz,</strong></p>
+  <p class="typewriter" data-text="Hayat bazen karmaşık ama seninle birlikteyken her şey daha anlamlı geliyor. Tanıştığımız günden beri içimde çok şey değişti."></p>
 
-      <p>
-        Bu not sadece bize ait.  
-        Bu tarihi biliyorsan, beni de biliyorsundur.
-      </p>
+  <p class="typewriter" data-text="İyi ki varsın. İyi ki benimlesin."></p>
 
-      <p>
-        Seni cinsiyetinden, geçmişinden, karmaşandan bağımsız sevdim.  
-        Seni <em>sen</em> olduğun için sevdim.
-      </p>
-
-      <p>
-        Bu not burada duracak.  
-        Ama biz durmayacağız.  
-        Biz büyüyeceğiz.
-      </p>
-
-      <div class="heart">❤️</div>
-    </div>
+  <div class="photo">
+    <img src="resimadi.webp" alt="Biz">
   </div>
+</div>
 
-  <script>
-    function checkPassword() {
-      const password = document.getElementById("passwordInput").value;
-      if (password === "03.05.2023") {
-        document.getElementById("secretNote").classList.add("show");
-      } else {
-        alert("Yanlış şifre 🤍");
-      }
-    }
-  </script>
+<script>
+function check() {
+  if (document.getElementById("password").value === "03.05.2023") {
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("note").style.display = "block";
+    startTyping();
+  } else {
+    alert("Bir daha düşün 💭");
+  }
+}
+
+function startTyping() {
+  const elements = document.querySelectorAll(".typewriter");
+  let delay = 0;
+
+  elements.forEach(el => {
+    const text = el.getAttribute("data-text");
+    el.innerHTML = "<span></span>";
+    const span = el.querySelector("span");
+    let i = 0;
+
+    setTimeout(() => {
+      const interval = setInterval(() => {
+        span.textContent += text[i];
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 40);
+    }, delay);
+
+    delay += text.length * 40 + 400;
+  });
+}
+</script>
+
 </body>
 </html>
