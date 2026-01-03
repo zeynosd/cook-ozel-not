@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Çok Çok Özel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 24px;
+      border-radius: 20px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      color: #e75480;
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      background: #e75480;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d64570;
+    }
+
+    /* 🔒 Not gizliyken */
+    .hidden-note {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 2s ease, transform 2s ease;
+      margin-top: 24px;
+    }
+
+    /* ✨ Şifre doğruysa */
+    .hidden-note.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 💗 Kalp animasyonu */
+    .heart {
+      font-size: 28px;
+      animation: pulse 1.5s infinite;
+      display: inline-block;
+      margin: 16px 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🔐</h1>
+    <p>Tanıştığımız günün tarihi ;))</p>
+
+    <input type="text" id="passwordInput" placeholder="gg.aa.yyyy">
+    <br>
+    <button onclick="checkPassword()">Aç</button>
+
+    <!-- 💌 GİZLİ NOT -->
+    <div id="secretNote" class="hidden-note">
+
+      <!-- 🖼️ RESİM (istersen sil) -->
+      <!-- <img src="biz.webp" alt="biz"> -->
+
+      <div class="heart">❤️</div>
+
+      <p><strong>Sevgilim Deniz,</strong></p>
+
+      <p>
+        Bu not sadece bize ait.  
+        Bu tarihi biliyorsan, beni de biliyorsundur.
+      </p>
+
+      <p>
+        Seni cinsiyetinden, geçmişinden, karmaşandan bağımsız sevdim.  
+        Seni <em>sen</em> olduğun için sevdim.
+      </p>
+
+      <p>
+        Bu not burada duracak.  
+        Ama biz durmayacağız.  
+        Biz büyüyeceğiz.
+      </p>
+
+      <div class="heart">❤️</div>
+    </div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      if (password === "03.05.2023") {
+        document.getElementById("secretNote").classList.add("show");
+      } else {
+        alert("Yanlış şifre 🤍");
+      }
+    }
+  </script>
+</body>
+</html>
